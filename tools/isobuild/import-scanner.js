@@ -211,9 +211,11 @@ export default class ImportScanner {
     }
 
     const absLowerPath = absPath.toLowerCase();
-    const old = this.absPathToOutputIndex[absLowerPath];
 
-    if (old) {
+    if (has(this.absPathToOutputIndex, absLowerPath)) {
+      const old = this.outputFiles[
+        this.absPathToOutputIndex[absLowerPath]];
+
       // If the old file is just an empty stub, let the new file take
       // precedence over it.
       if (old.implicit === true) {
